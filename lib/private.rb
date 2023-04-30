@@ -1,17 +1,7 @@
 require 'download_strategy'
-
-# GitHubPrivateRepositoryDownloadStrategy downloads contents from GitHub
-# Private Repository. To use it, add
-# `:using => :github_private_repo` to the URL section of
-# your formula. This download strategy uses GitHub access tokens (in the
-# environment variables `HOMEBREW_GITHUB_API_TOKEN`) to sign the request.  This
-# strategy is suitable for corporate use just like S3DownloadStrategy, because
-# it lets you use a private GitHub repository for internal distribution.  It
-# works with public one, but in that case simply use CurlDownloadStrategy.
 class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   require 'utils/formatter'
   require 'utils/github'
-
   def initialize(url, name, version, **meta)
     super
     parse_url_pattern
@@ -32,13 +22,15 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
 
   private
 
-  def _fetch(url:, resolved_url:)
-    curl_download download_url, to: temporary_path
+  def _fetch(url:, resolved_url:, timeout:)
+    curl_download download_url, to: temporary_path, timeout: timeout
   end
 
   def set_github_token
     @github_token = ENV['HOMEBREW_GITHUB_API_TOKEN']
-    raise CurlDownloadStrategyError, 'Environment variable HOMEBREW_GITHUB_API_TOKEN is required.' unless @github_token
+    unless @github_token
+      raise CurlDownloadStrategyError, 'Environmental variable HOMEBREW_GITHUB_API_TOKEN is required.'
+    end
 
     validate_github_repository_access!
   end
@@ -58,8 +50,9 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
 end
 
 # GitHubPrivateRepositoryReleaseDownloadStrategy downloads tarballs from GitHub
-# Release assets. To use it, add `:using => :github_private_release` to the URL section
-# of your formula. This download strategy uses GitHub access tokens (in the
+# Release assets. To use it, add
+# `:using => GitHubPrivateRepositoryReleaseDownloadStrategy` to the URL section of
+# your formula. This download strategy uses GitHub access tokens (in the
 # environment variables HOMEBREW_GITHUB_API_TOKEN) to sign the request.
 class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDownloadStrategy
   def initialize(url, name, version, **meta)
@@ -79,10 +72,10 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
 
   private
 
-  def _fetch(url:, resolved_url:)
+  def _fetch(url:, resolved_url:, timeout:)
     # HTTP request header `Accept: application/octet-stream` is required.
     # Without this, the GitHub API will respond with metadata, not binary.
-    curl_download download_url, '--header', 'Accept: application/octet-stream', to: temporary_path
+    curl_download download_url, '--header', 'Accept: application/octet-stream', to: temporary_path, timeout: timeout
   end
 
   def asset_id
@@ -98,26 +91,6 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
   end
 
   def fetch_release_metadata
-    release_url = "https://api.github.com/repos/#{@owner}/#{@repo}/releases/tags/#{@tag}"
-    GitHub.open_api(release_url)
-  end
-end
-
-class DownloadStrategyDetector
-  class << self
-    module Compat
-      def detect_from_symbol(symbol)
-        case symbol
-        when :github_private_repo
-          GitHubPrivateRepositoryDownloadStrategy
-        when :github_private_release
-          GitHubPrivateRepositoryReleaseDownloadStrategy
-        else
-          super(symbol)
-        end
-      end
-    end
-
-    prepend Compat
+    GitHub.get_release(@owner, @repo, @tag)
   end
 end
