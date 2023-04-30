@@ -5,7 +5,7 @@
 class Mattd < Formula
   desc "A simple tool to grab my dots and setup a new machine"
   homepage "https://github.com/matt-riley/dots-cli"
-  version "0.0.10"
+  version "0.0.11"
 
   depends_on "atuin"
   depends_on "bat"
@@ -29,16 +29,16 @@ class Mattd < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.10/mattd_Darwin_x86_64.tar.gz"
-      sha256 "8175f5eef02ef9f042bccb86faa10ce39abf6fd3994c123e801c6ef12a195cb1"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.11/mattd_Darwin_x86_64.tar.gz"
+      sha256 "c9e4629a5689d95376ddee7a7ab94c415f87335afd56d98dea8da0c5ba2a556e"
 
       def install
         bin.install "mattd"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.10/mattd_Darwin_arm64.tar.gz"
-      sha256 "4e491a3bb1dc492a04cb3dc088eb58a13107a95b830936a43a9de072c2469b67"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.11/mattd_Darwin_arm64.tar.gz"
+      sha256 "beefd6a00ef523df10c101bb5cf81f5655f566cfb07d03416843e32fc79530dd"
 
       def install
         bin.install "mattd"
@@ -48,16 +48,16 @@ class Mattd < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.10/mattd_Linux_arm64.tar.gz"
-      sha256 "db778ed9f646188084cc57c149deed2daf35cf1fc409c3f454167a52fd4060ad"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.11/mattd_Linux_arm64.tar.gz"
+      sha256 "4936ed5f2bb0add718fe73a63b09f1224812530bb2cd01fc5be5b630132d4106"
 
       def install
         bin.install "mattd"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.10/mattd_Linux_x86_64.tar.gz"
-      sha256 "a187cd7896097512044c659599f2309ec419c1febdd2b53e3d29e98025699601"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.11/mattd_Linux_x86_64.tar.gz"
+      sha256 "82a7475d74bc64496425417366a1b505f3097575aa99074d24f6641c47683492"
 
       def install
         bin.install "mattd"
