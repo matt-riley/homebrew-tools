@@ -5,7 +5,7 @@
 class Mattd < Formula
   desc "A simple tool to grab my dots and setup a new machine"
   homepage "https://github.com/matt-riley/dots-cli"
-  version "0.0.13"
+  version "0.0.1"
 
   depends_on "atuin"
   depends_on "bat"
@@ -28,17 +28,17 @@ class Mattd < Formula
   depends_on "zsh"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.13/mattd_Darwin_x86_64.tar.gz"
-      sha256 "a96b7fe47c3b8a5e71f3babeef6d4a204c93208f395f6b450196a59ce93cba2c"
+    if Hardware::CPU.arm?
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.1/mattd_Darwin_arm64.tar.gz"
+      sha256 "a0c149d5572964fef2bee0ebb412ee15c9ee97ef361a528307db0c2c8ed38173"
 
       def install
         bin.install "mattd"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.13/mattd_Darwin_arm64.tar.gz"
-      sha256 "9edc4771f4365f0d353e8b3a3f82dd19a09e68b8e8fdaef0db79cb3e18bb69c7"
+    if Hardware::CPU.intel?
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.1/mattd_Darwin_x86_64.tar.gz"
+      sha256 "7c95cae13ab68582c41fb99ecd7a3c457ffafce19c6cdb3fed2c70a7652b9715"
 
       def install
         bin.install "mattd"
@@ -48,16 +48,16 @@ class Mattd < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.13/mattd_Linux_arm64.tar.gz"
-      sha256 "e5548f6a1a8e88563c13c64b898c46fdb8e95417c830656031ed1097e842edc6"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.1/mattd_Linux_arm64.tar.gz"
+      sha256 "0334d0019beb7c003e2447f53de945f19d0b9ed54976556d1d1a878c51fdbc8a"
 
       def install
         bin.install "mattd"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.13/mattd_Linux_x86_64.tar.gz"
-      sha256 "f5e58246500a69c2b6bb9a6a9bc47939d1268003ac30d96e5c668aadd867438a"
+      url "https://github.com/matt-riley/dots-cli/releases/download/v0.0.1/mattd_Linux_x86_64.tar.gz"
+      sha256 "c44a46d2bb3776cf69bf51e76136e36856889fbabca974b2249de64e42946237"
 
       def install
         bin.install "mattd"
