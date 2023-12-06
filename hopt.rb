@@ -5,20 +5,20 @@
 class Hopt < Formula
   desc "A TUI to interact with The Hoptimist store"
   homepage "https://github.com/matt-riley/hopcli"
-  version "0.0.2"
+  version "0.1.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.0.2/hopt_Darwin_x86_64.tar.gz"
-      sha256 "8a9ce337c867d94c7413a14898987448ab6bc20883bba4eda18384ed1b6e7a28"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Darwin_x86_64.tar.gz"
+      sha256 "5801728152443836ae398a7c324e66b8bf61187fe329ec12d9b7061054bb6bfa"
 
       def install
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.0.2/hopt_Darwin_arm64.tar.gz"
-      sha256 "9152b859395c7b3ed9d9d9959f94a5984d697c58ee2525269727672ab94691d4"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Darwin_arm64.tar.gz"
+      sha256 "bd9418f1ff3ab75bc0d54d10cfde6a8af735d6ce08d469ac2b58a804cd74b5ee"
 
       def install
         bin.install "hopt"
@@ -27,17 +27,17 @@ class Hopt < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.0.2/hopt_Linux_arm64.tar.gz"
-      sha256 "d1817e428660ad91d8da99ac0555ab7bcd8633db24112f6596cd78a327416142"
+    if Hardware::CPU.intel?
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Linux_x86_64.tar.gz"
+      sha256 "d9b17f1663c571afb4a974fdc04c3a881472fb6c8121c760d070f737bfa05bff"
 
       def install
         bin.install "hopt"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.0.2/hopt_Linux_x86_64.tar.gz"
-      sha256 "a1e1dc450e8bc726a8ff80d649e2b11caf52b4eab9fbb4e07271b1d676820dcc"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Linux_arm64.tar.gz"
+      sha256 "76e4c201ae07c25dd377d1d9f7aaf5799423419da05fdff5752df60739a6520a"
 
       def install
         bin.install "hopt"
