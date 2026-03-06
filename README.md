@@ -22,7 +22,7 @@ brew install matt-riley/tools/tui  # installs the `mattriley` binary
 | Tool | Tap version | Description | Homepage | License | Platform support |
 |------|-------------|-------------|----------|---------|-----------------|
 | `hopt` | 0.1.0 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (x86\_64, arm64), Linux (x86\_64, arm64) |
-| `tui` | 0.2.1 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (x86\_64, arm64), Linux (amd64, arm64) |
+| `tui` | 0.2.1 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (x86\_64, arm64), Linux (x86\_64, arm64) |
 
 ## Highlights
 
