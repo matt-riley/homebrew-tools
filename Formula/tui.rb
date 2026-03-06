@@ -11,7 +11,7 @@ class Tui < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/matt-riley/workv2/releases/download/v0.2.1/tui_0.2.1_darwin_amd64.tar.gz"
-      sha256 "38cb3be0bb6f2459c831c061490489afb4bcca65dbcb68b1d1615de828cacc72"
+      sha256 "11623f689ea747ccf42ab92369dcabcee721924c5d5364f77717c09f92f00337"
 
       define_method(:install) do
         bin.install "mattriley"
@@ -19,7 +19,7 @@ class Tui < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/matt-riley/workv2/releases/download/v0.2.1/tui_0.2.1_darwin_arm64.tar.gz"
-      sha256 "88fbb9729e15f1d86ba3ae5c0280f54a613bcdf41cea474ce744fc92399d4e5c"
+      sha256 "d8910826db6bd693cf157f5d74f8bb25bf6195b400bb15a2aabe21994e0c8904"
 
       define_method(:install) do
         bin.install "mattriley"
@@ -30,14 +30,14 @@ class Tui < Formula
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://github.com/matt-riley/workv2/releases/download/v0.2.1/tui_0.2.1_linux_amd64.tar.gz"
-      sha256 "0e77107b86f577901dd54ef0bc0a4fa1f390647908004af1633eea277def35f5"
+      sha256 "481b66cc0b8475e75637c03fe0bbd11420d0026ea8737baf4da5ea01da52fcf0"
       define_method(:install) do
         bin.install "mattriley"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/matt-riley/workv2/releases/download/v0.2.1/tui_0.2.1_linux_arm64.tar.gz"
-      sha256 "42febd5560bcba296fbfb3b24d6453a0e4389fb9c278f9aedd740214a0965a63"
+      sha256 "c83d54ab9964371067d6956057285f5a447c189a35668acaede63f137f4876a7"
       define_method(:install) do
         bin.install "mattriley"
       end
