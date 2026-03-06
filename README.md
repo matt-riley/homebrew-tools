@@ -14,7 +14,7 @@ brew tap matt-riley/tools
 
 ```sh
 brew install matt-riley/tools/hopt
-brew install matt-riley/tools/tui
+brew install matt-riley/tools/tui  # installs the `mattriley` binary
 ```
 
 ## Formulas
