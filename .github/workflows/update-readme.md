@@ -54,6 +54,8 @@ Update `README.md` so it accurately reflects this Homebrew tap's current formula
 
 Rewrite `README.md` in a concise, scannable structure that includes:
 
+- Be positive, encouraging and helpful
+- Use emojiis moderately for engagement
 - a short tap overview
 - install instructions for adding the tap
   - `brew tap matt-riley/tools`
@@ -70,7 +72,7 @@ Rewrite `README.md` in a concise, scannable structure that includes:
 - a clear note that versions come from tap formulas (tap-version-only policy)
 - `Last updated: YYYY-MM-DD (UTC)`
 
-Keep wording compact and factual.
+Keep wording factual.
 
 ## Change safety and PR behavior
 
