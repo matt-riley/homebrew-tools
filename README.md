@@ -28,7 +28,7 @@ brew install matt-riley/tools/tui  # installs the `mattriley` binary
 
 ### hopt
 
-- Terminal UI for interacting with [The Hoptimist](https://github.com/matt-riley/hopcli) store.
+- Terminal UI for interacting with The Hoptimist store ([matt-riley/hopcli](https://github.com/matt-riley/hopcli)).
 - Installs the `hopt` binary.
 - *(Upstream README unavailable; description sourced from formula.)*
 
