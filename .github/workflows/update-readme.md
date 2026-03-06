@@ -11,6 +11,7 @@ tools:
   github:
     read-only: true
     toolsets: [repos]
+    github-token: "${{ secrets.HOMEBREW_TOOLS_GH_TOKEN }}"
   edit: {}
   bash:
     - "ls"
@@ -45,6 +46,7 @@ Update `README.md` so it accurately reflects this Homebrew tap's current formula
    - use formula `version` values only
    - do **not** look up or claim upstream latest versions
 4. For richer feature summaries, read each source repository README using the GitHub tool:
+   - the `tools.github.github-token` secret must have read access to `matt-riley/hopcli` and `matt-riley/workv2` (private repo reads)
    - infer `owner/repo` from each formula homepage when it is a GitHub URL
    - read `README.md` (and common README filename variants if needed)
    - summarize features conservatively from repository README content only
@@ -54,8 +56,6 @@ Update `README.md` so it accurately reflects this Homebrew tap's current formula
 
 Rewrite `README.md` in a concise, scannable structure that includes:
 
-- Be positive, encouraging and helpful
-- Use emojiis moderately for engagement
 - a short tap overview
 - install instructions for adding the tap
   - `brew tap matt-riley/tools`
