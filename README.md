@@ -18,6 +18,7 @@ brew tap matt-riley/tools
 
 ```bash
 brew install matt-riley/tools/hopt
+brew install matt-riley/tools/newbrew
 brew install matt-riley/tools/tui
 ```
 
@@ -26,6 +27,7 @@ brew install matt-riley/tools/tui
 | Tool | Tap Version | Description | Homepage | License | Platform Support |
 |------|-------------|-------------|----------|---------|-----------------|
 | **hopt** | 0.1.0 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
+| **newbrew** | 0.1.2 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
 | **tui** | 0.2.1 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
 
 ---
@@ -40,6 +42,16 @@ A terminal user interface application for browsing and interacting with [The Hop
 
 ```bash
 brew install matt-riley/tools/hopt
+```
+
+### newbrew `v0.1.2`
+
+> Browse and inspect new Homebrew formulae from your terminal
+
+`newbrew` is a cheerful terminal companion for browsing freshly merged Homebrew formulae without leaving your shell. Source: [matt-riley/newbrew](https://github.com/matt-riley/newbrew).
+
+```bash
+brew install matt-riley/tools/newbrew
 ```
 
 ### tui `v0.2.1`
@@ -60,4 +72,4 @@ Versions shown in this README and in each formula reflect the **tap formula vers
 
 ---
 
-_Last updated: 2026-03-06 (UTC)_
+_Last updated: 2026-03-07 (UTC)_
