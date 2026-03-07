@@ -21,6 +21,8 @@ tools:
     - "awk *"
     - "date *"
 safe-outputs:
+  noop:
+    report-as-issue: false
   create-pull-request:
     title-prefix: "[readme-sync] "
     draft: false

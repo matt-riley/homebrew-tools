@@ -23,7 +23,7 @@
 #
 # Refresh README.md from Homebrew formula metadata on a monthly schedule.
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"41a78bb54c4ef50c3e7b4063b4c5ea69da440661cb983d4ca88ecb605b887301","compiler_version":"v0.50.7"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"5d3cb9f7c5f55bb6324b703d8da3b1fe2b8915e657de4ca6126f1c21634949fb","compiler_version":"v0.50.7"}
 
 name: "Monthly README refresh"
 "on":
@@ -1047,7 +1047,7 @@ jobs:
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
-          GH_AW_NOOP_REPORT_AS_ISSUE: "true"
+          GH_AW_NOOP_REPORT_AS_ISSUE: "false"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
