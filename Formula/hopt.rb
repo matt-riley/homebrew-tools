@@ -5,20 +5,20 @@
 class Hopt < Formula
   desc "A TUI to interact with The Hoptimist store"
   homepage "https://github.com/matt-riley/hopcli"
-  version "0.1.0"
+  version "0.2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Darwin_x86_64.tar.gz"
-      sha256 "5801728152443836ae398a7c324e66b8bf61187fe329ec12d9b7061054bb6bfa"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Darwin_x86_64.tar.gz"
+      sha256 "995781ecf176dde34e1b63482f4770cf0fdc94b30f4fd8b16db4d32015a4f1d2"
 
       def install
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Darwin_arm64.tar.gz"
-      sha256 "bd9418f1ff3ab75bc0d54d10cfde6a8af735d6ce08d469ac2b58a804cd74b5ee"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Darwin_arm64.tar.gz"
+      sha256 "d305ae8c41af2df6fa84ab0bd0b27a4145318de407081904b465209b02fdf9e2"
 
       def install
         bin.install "hopt"
@@ -28,16 +28,16 @@ class Hopt < Formula
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Linux_x86_64.tar.gz"
-      sha256 "d9b17f1663c571afb4a974fdc04c3a881472fb6c8121c760d070f737bfa05bff"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Linux_x86_64.tar.gz"
+      sha256 "8c9ab2d9097b55debc4a03d97eeec6044a0906cc16561c581501552b944340ed"
 
       def install
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.1.0/hopt_Linux_arm64.tar.gz"
-      sha256 "76e4c201ae07c25dd377d1d9f7aaf5799423419da05fdff5752df60739a6520a"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Linux_arm64.tar.gz"
+      sha256 "a49ec937e447503fe597e78da0f802c3c1548463322cf5f27a04103c763b727c"
 
       def install
         bin.install "hopt"
