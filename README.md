@@ -26,15 +26,15 @@ brew install matt-riley/tools/tui
 
 | Tool | Tap Version | Description | Homepage | License | Platform Support |
 |------|-------------|-------------|----------|---------|-----------------|
-| **hopt** | 0.1.0 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
+| **hopt** | 0.2.0 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
 | **newbrew** | 0.1.2 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
-| **tui** | 0.2.1 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
+| **tui** | 0.4.1 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86\_64, arm64) |
 
 ---
 
 ## 📦 Per-tool Highlights
 
-### hopt `v0.1.0`
+### hopt `v0.2.0`
 
 > A TUI to interact with The Hoptimist store
 
@@ -54,7 +54,7 @@ brew install matt-riley/tools/hopt
 brew install matt-riley/tools/newbrew
 ```
 
-### tui `v0.2.1`
+### tui `v0.4.1`
 
 > Workv2 terminal UI
 
@@ -72,4 +72,4 @@ Versions shown in this README and in each formula reflect the **tap formula vers
 
 ---
 
-_Last updated: 2026-03-07 (UTC)_
+_Last updated: 2026-04-01 (UTC)_
