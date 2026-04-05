@@ -1,0 +1,28 @@
+name: Duplicate package guard
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - Formula/**
+      - Casks/**
+      - script/check-duplicate-package-basenames.sh
+      - .github/workflows/duplicate-package-guard.yml
+  push:
+    paths:
+      - Formula/**
+      - Casks/**
+      - script/check-duplicate-package-basenames.sh
+      - .github/workflows/duplicate-package-guard.yml
+
+jobs:
+  duplicate-package-guard:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Check for duplicate package basenames
+        run: script/check-duplicate-package-basenames.sh
