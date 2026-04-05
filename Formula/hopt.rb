@@ -5,41 +5,39 @@
 class Hopt < Formula
   desc "A TUI to interact with The Hoptimist store"
   homepage "https://github.com/matt-riley/hopcli"
-  version "0.2.0"
+  version "0.2.2"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Darwin_x86_64.tar.gz"
-      sha256 "995781ecf176dde34e1b63482f4770cf0fdc94b30f4fd8b16db4d32015a4f1d2"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Darwin_x86_64.tar.gz"
+      sha256 "8eb88f86b77ca320faab237d0efc59bb49f9988c629dadbf6c4326def5400c65"
 
-      def install
+      define_method(:install) do
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Darwin_arm64.tar.gz"
-      sha256 "d305ae8c41af2df6fa84ab0bd0b27a4145318de407081904b465209b02fdf9e2"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Darwin_arm64.tar.gz"
+      sha256 "7426143f523bbde07d3e354594c187203b765087aa6ea0c69af5eb626443c2f8"
 
-      def install
+      define_method(:install) do
         bin.install "hopt"
       end
     end
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Linux_x86_64.tar.gz"
-      sha256 "8c9ab2d9097b55debc4a03d97eeec6044a0906cc16561c581501552b944340ed"
-
-      def install
+    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Linux_x86_64.tar.gz"
+      sha256 "0569317325af1ed4b6393a8c554fb2d4cec3286e6f8fa6e91df15fed22fac0d0"
+      define_method(:install) do
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.0/hopt_Linux_arm64.tar.gz"
-      sha256 "a49ec937e447503fe597e78da0f802c3c1548463322cf5f27a04103c763b727c"
-
-      def install
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Linux_arm64.tar.gz"
+      sha256 "797d29a93556b6edccafbdcea97872a7a291c7e2a1f51264e99124f7c8eea3c7"
+      define_method(:install) do
         bin.install "hopt"
       end
     end
