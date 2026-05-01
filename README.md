@@ -38,7 +38,7 @@ brew install matt-riley/tools/hopt
 | Tool | Tap Version | Description | Homepage | License | Platform Support |
 |------|-------------|-------------|----------|---------|-----------------|
 | **hopt** | 0.2.2 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
-| **newbrew** | 0.1.2 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
+| **newbrew** | 0.1.4 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **tui** | 0.4.2 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 
 ---
@@ -55,7 +55,7 @@ A terminal user interface application for browsing and interacting with [The Hop
 brew install matt-riley/tools/hopt
 ```
 
-### newbrew `v0.1.2`
+### newbrew `v0.1.4`
 
 > Browse and inspect new Homebrew formulae from your terminal
 
@@ -83,4 +83,4 @@ Versions shown in this README reflect the **tap formula version** from `Formula/
 
 ---
 
-_Last updated: 2026-04-05 (UTC)_
+_Last updated: 2026-05-01 (UTC)_
