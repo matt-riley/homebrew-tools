@@ -19,6 +19,7 @@ This tap is currently formula-only. README versions and package metadata are ref
 ### Install commands
 
 ```bash
+brew install matt-riley/tools/agit
 brew install matt-riley/tools/hopt
 brew install matt-riley/tools/newbrew
 brew install matt-riley/tools/tui
@@ -37,6 +38,7 @@ brew install matt-riley/tools/hopt
 
 | Tool | Tap Version | Description | Homepage | License | Platform Support |
 |------|-------------|-------------|----------|---------|-----------------|
+| **agit** | 1.10.0 | AI-agent version control | [matt-riley/agengit](https://github.com/matt-riley/agengit) | GPL-3.0-only | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **hopt** | 0.2.2 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **newbrew** | 0.1.4 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **tui** | 0.4.2 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
@@ -44,6 +46,16 @@ brew install matt-riley/tools/hopt
 ---
 
 ## 📦 Per-tool Highlights
+
+### agit `v1.10.0`
+
+> AI-agent version control
+
+`agit` is an AI-agent powered version control tool. Source: [matt-riley/agengit](https://github.com/matt-riley/agengit).
+
+```bash
+brew install matt-riley/tools/agit
+```
 
 ### hopt `v0.2.2`
 
@@ -83,4 +95,4 @@ Versions shown in this README reflect the **tap formula version** from `Formula/
 
 ---
 
-_Last updated: 2026-05-01 (UTC)_
+_Last updated: 2026-05-25 (UTC)_
