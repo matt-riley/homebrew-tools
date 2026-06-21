@@ -5,26 +5,26 @@
 class Agit < Formula
   desc "AI-agent version control"
   homepage "https://github.com/matt-riley/agengit"
-  version "1.22.3"
+  version "1.23.0"
   license "GPL-3.0-only"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/agengit/releases/download/v1.22.3/agit-aarch64-macos.tar.gz"
-      sha256 "188a278bd6286eb0c76901d23067eb3b652c43fe0ed20ebdb74aacf05259b396"
+      url "https://github.com/matt-riley/agengit/releases/download/v1.23.0/agit-aarch64-macos.tar.gz"
+      sha256 "d55b44d3ca36da2366ddf5c6ae9c34ee6b14163f725e778f8f5678fc80645fdd"
     else
-      url "https://github.com/matt-riley/agengit/releases/download/v1.22.3/agit-x86_64-macos.tar.gz"
-      sha256 "57bd70e7f935824e826014f1a60e6db7303a26a8a8bce02d47f0010560869bbd"
+      url "https://github.com/matt-riley/agengit/releases/download/v1.23.0/agit-x86_64-macos.tar.gz"
+      sha256 "a0aa86e626767d02951718a10ab79f41a4f3c3c6ed918c14ecc4fc452204d82d"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/agengit/releases/download/v1.22.3/agit-aarch64-linux.tar.gz"
-      sha256 "7a93702383a1b5bfa5df8d0825a5dd7fbc565953297f0a9cf65634d6328e2d4d"
+      url "https://github.com/matt-riley/agengit/releases/download/v1.23.0/agit-aarch64-linux.tar.gz"
+      sha256 "0ffdf01109d8f54125832e93143e825ab5ab9bc3bbdd36c41904d341c60ffca0"
     else
-      url "https://github.com/matt-riley/agengit/releases/download/v1.22.3/agit-x86_64-linux.tar.gz"
-      sha256 "63c1f4a3b3fab0fa501069b5c38bedb7eb79c8a316abbb99ed0ea968f11c653e"
+      url "https://github.com/matt-riley/agengit/releases/download/v1.23.0/agit-x86_64-linux.tar.gz"
+      sha256 "4d61ba3670ec7dac095bfcdca4b12f49e1b400dc47fd0b2782ba743bc7b7a8f2"
     end
   end
 
