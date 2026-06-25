@@ -5,20 +5,20 @@
 class SkillEval < Formula
   desc "Automated CLI for evaluating AI agent skills"
   homepage "https://github.com/matt-riley/skill-evaluator"
-  version "0.6.0"
+  version "1.0.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/skill-evaluator/releases/download/v0.6.0/skill-eval_Darwin_x86_64.tar.gz"
-      sha256 "b64abb12b2c4cc49a5fc3fef9585a1523f8b2fd1cc1f45848124020769def2d5"
+      url "https://github.com/matt-riley/skill-evaluator/releases/download/v1.0.0/skill-eval_Darwin_x86_64.tar.gz"
+      sha256 "6d319c684e2e905f2c50569dbdd926ceb74393f3cef0268ceb6ec01759b0be29"
 
       define_method(:install) do
         bin.install "skill-eval"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/skill-evaluator/releases/download/v0.6.0/skill-eval_Darwin_arm64.tar.gz"
-      sha256 "59e5a505f43c8f8e85be2f70fa3cf3dcbe40fc01c3a1e5b76a5803cc600c4fdc"
+      url "https://github.com/matt-riley/skill-evaluator/releases/download/v1.0.0/skill-eval_Darwin_arm64.tar.gz"
+      sha256 "d38371e91e2f2db64576299552c212a697e29f1290ff9bcafb2a6d20673f4788"
 
       define_method(:install) do
         bin.install "skill-eval"
@@ -28,15 +28,15 @@ class SkillEval < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/skill-evaluator/releases/download/v0.6.0/skill-eval_Linux_x86_64.tar.gz"
-      sha256 "a1cf145d996a2a29e69c83c255e8a0474dde4cc8da8f7c5e850e1416654cb0c2"
+      url "https://github.com/matt-riley/skill-evaluator/releases/download/v1.0.0/skill-eval_Linux_x86_64.tar.gz"
+      sha256 "4e08dc260a696ae3feba73eddbff7ebebb355273e6ed110e94274b50d29ffb5e"
       define_method(:install) do
         bin.install "skill-eval"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/skill-evaluator/releases/download/v0.6.0/skill-eval_Linux_arm64.tar.gz"
-      sha256 "8c910631b06088fff1f74d3c2cd95ef1cb9d6370701e69c3ff1f84e18499b5d8"
+      url "https://github.com/matt-riley/skill-evaluator/releases/download/v1.0.0/skill-eval_Linux_arm64.tar.gz"
+      sha256 "c4c30e4f37c21cdc08c3ab3bb89ce238f6ce42c59bef931aef7a1cf04ebaa28c"
       define_method(:install) do
         bin.install "skill-eval"
       end
