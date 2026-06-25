@@ -44,7 +44,7 @@ brew install matt-riley/tools/hopt
 | **hopt** | 0.2.2 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **liner** | 1.0.0 | Publish Markdown blog posts to mattriley.work via lexi's write API | [matt-riley/liner](https://github.com/matt-riley/liner) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **newbrew** | 0.1.6 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
-| **skill-eval** | 0.2.0 | Automated CLI for evaluating AI agent skills | [matt-riley/skill-evaluator](https://github.com/matt-riley/skill-evaluator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
+| **skill-eval** | 1.0.0 | Automated CLI for evaluating AI agent skills | [matt-riley/skill-evaluator](https://github.com/matt-riley/skill-evaluator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **tui** | 0.4.2 | Workv2 terminal UI | [matt-riley/workv2](https://github.com/matt-riley/workv2) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 
 ---
@@ -91,7 +91,7 @@ brew install matt-riley/tools/liner
 brew install matt-riley/tools/newbrew
 ```
 
-### skill-eval `v0.2.0`
+### skill-eval `v1.0.0`
 
 > Automated CLI for evaluating AI agent skills
 
@@ -119,4 +119,4 @@ Versions shown in this README reflect the **tap formula version** from `Formula/
 
 ---
 
-_Last updated: 2026-06-24 (UTC)_
+_Last updated: 2026-06-25 (UTC)_
