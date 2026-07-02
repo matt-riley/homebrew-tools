@@ -5,21 +5,21 @@
 class Tui < Formula
   desc "Workv2 terminal UI"
   homepage "https://github.com/matt-riley/workv2"
-  version "0.4.2"
+  version "0.4.3"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/workv2/releases/download/v0.4.2/tui_0.4.2_darwin_amd64.tar.gz"
-      sha256 "38a973e107f2f1efe9ec54fc5dc2e7c2f154ddaee056662a7adca82f5ddd5cb2"
+      url "https://github.com/matt-riley/workv2/releases/download/v0.4.3/tui_0.4.3_darwin_amd64.tar.gz"
+      sha256 "2d81526200161caba9bc229cfc92bf2487329521e7c96a0485fec2ddeb21d0d7"
 
       define_method(:install) do
         bin.install "mattriley"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/workv2/releases/download/v0.4.2/tui_0.4.2_darwin_arm64.tar.gz"
-      sha256 "e6fda57c7faffa07f34389724d75e6da7ad2c994714e89832d0a0996edf39989"
+      url "https://github.com/matt-riley/workv2/releases/download/v0.4.3/tui_0.4.3_darwin_arm64.tar.gz"
+      sha256 "652395bcd95d76eaa9e66ee0ea3de3215a50f514417d2fc47d6c11f05d5d6e28"
 
       define_method(:install) do
         bin.install "mattriley"
@@ -29,15 +29,15 @@ class Tui < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/workv2/releases/download/v0.4.2/tui_0.4.2_linux_amd64.tar.gz"
-      sha256 "09cb9500aa6a9a1827ad53d0cdc1adcb0e8451e1e5591137cc052cb87a7883cd"
+      url "https://github.com/matt-riley/workv2/releases/download/v0.4.3/tui_0.4.3_linux_amd64.tar.gz"
+      sha256 "9b58136b8800bd0fdcc80da303ba7339af4c3b91832fd4242de32407d71eb768"
       define_method(:install) do
         bin.install "mattriley"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/workv2/releases/download/v0.4.2/tui_0.4.2_linux_arm64.tar.gz"
-      sha256 "8b7bedd4214dc8aca92fe2fcfb6e4530cc0ad20658cb8996f6dee1c5b3ca5af0"
+      url "https://github.com/matt-riley/workv2/releases/download/v0.4.3/tui_0.4.3_linux_arm64.tar.gz"
+      sha256 "5d6c56a19960debbe65e95ea6d33f3b9bdd6fce96a546770a2d931d221f5b089"
       define_method(:install) do
         bin.install "mattriley"
       end
