@@ -5,20 +5,20 @@
 class Newbrew < Formula
   desc "Browse and inspect new Homebrew formulae from your terminal"
   homepage "https://github.com/matt-riley/newbrew"
-  version "0.1.7"
+  version "0.3.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/newbrew/releases/download/v0.1.7/newbrew_0.1.7_darwin_amd64.tar.gz"
-      sha256 "a525c96992523f802778f6ba6ea4f105ce30c82f049c68c977214eac2bc3f187"
+      url "https://github.com/matt-riley/newbrew/releases/download/v0.3.0/newbrew_0.3.0_darwin_amd64.tar.gz"
+      sha256 "bb3424c249ec6ceb08662a51eeace3d21e1903d428fee1de996bd9efaca3d876"
 
       define_method(:install) do
         bin.install "newbrew"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/newbrew/releases/download/v0.1.7/newbrew_0.1.7_darwin_arm64.tar.gz"
-      sha256 "e2ea63012adabfc719c883d2a5dfc49e3d9a4a618fa46c087883eb9048972866"
+      url "https://github.com/matt-riley/newbrew/releases/download/v0.3.0/newbrew_0.3.0_darwin_arm64.tar.gz"
+      sha256 "dc847db82bc5d5fa2a60c6b9a80721f8172f0951d3009a47f1e2caa6d85e0897"
 
       define_method(:install) do
         bin.install "newbrew"
@@ -28,15 +28,15 @@ class Newbrew < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/newbrew/releases/download/v0.1.7/newbrew_0.1.7_linux_amd64.tar.gz"
-      sha256 "3a75828a5456e14a791fd1e8d49ae12ac3d652e5c3f0b80539cec2e94a1c8f7d"
+      url "https://github.com/matt-riley/newbrew/releases/download/v0.3.0/newbrew_0.3.0_linux_amd64.tar.gz"
+      sha256 "b2493c70327aab9bf6aefe63d7b919148678680d3e6ee894d21b1be53b641233"
       define_method(:install) do
         bin.install "newbrew"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/newbrew/releases/download/v0.1.7/newbrew_0.1.7_linux_arm64.tar.gz"
-      sha256 "53d97cb73d4df89e4e1caa850331de046638ee1562b902a7d9102ac44a29f497"
+      url "https://github.com/matt-riley/newbrew/releases/download/v0.3.0/newbrew_0.3.0_linux_arm64.tar.gz"
+      sha256 "1f2cac6ca6d9c997fc442a740531b071c1285966e5a05c86d1209511d90ba5b4"
       define_method(:install) do
         bin.install "newbrew"
       end
