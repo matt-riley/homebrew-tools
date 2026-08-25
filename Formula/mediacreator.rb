@@ -5,20 +5,20 @@
 class Mediacreator < Formula
   desc "Generate media via fal.ai and kie.ai from the CLI and save it to disk"
   homepage "https://github.com/matt-riley/mediacreator"
-  version "0.2.0"
+  version "0.3.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/mediacreator/releases/download/v0.2.0/mediacreator_0.2.0_darwin_amd64.tar.gz"
-      sha256 "8512337c6d1cb211f24805cbfb847c4ae744d433abac36f65b6f6f9b1e3b2ce6"
+      url "https://github.com/matt-riley/mediacreator/releases/download/v0.3.0/mediacreator_0.3.0_darwin_amd64.tar.gz"
+      sha256 "c7fc882b98eee56f38cf0ce8a9204b6fdee22d23a35c5a358924321174ac50dd"
 
       define_method(:install) do
         bin.install "mediacreator"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/mediacreator/releases/download/v0.2.0/mediacreator_0.2.0_darwin_arm64.tar.gz"
-      sha256 "5eca53e54962373050fab6fb7352f13554724ec231e40a9ca17866ab3dc7ae51"
+      url "https://github.com/matt-riley/mediacreator/releases/download/v0.3.0/mediacreator_0.3.0_darwin_arm64.tar.gz"
+      sha256 "cf8195a973ea1f7dcc1d37d9d887914cfe245c772bc3e4198d6b9519b897420d"
 
       define_method(:install) do
         bin.install "mediacreator"
@@ -28,15 +28,15 @@ class Mediacreator < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/mediacreator/releases/download/v0.2.0/mediacreator_0.2.0_linux_amd64.tar.gz"
-      sha256 "2579eda5f18005e128d841aa917ba05030f9643dc4791d9b549cc18afb304b2a"
+      url "https://github.com/matt-riley/mediacreator/releases/download/v0.3.0/mediacreator_0.3.0_linux_amd64.tar.gz"
+      sha256 "81d16d1e7e62caf60d185bbf02bee9121dc51e3f0c4915c91890c15908759392"
       define_method(:install) do
         bin.install "mediacreator"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/mediacreator/releases/download/v0.2.0/mediacreator_0.2.0_linux_arm64.tar.gz"
-      sha256 "7c4f094c64ca69f8ac04cf5fd5184bc8cbf82cd9ecd1b87ed4c212f5e35dc6ec"
+      url "https://github.com/matt-riley/mediacreator/releases/download/v0.3.0/mediacreator_0.3.0_linux_arm64.tar.gz"
+      sha256 "a5e1a039f86a79985227b3ac53f2039df80b289db3416bafdfe80e82c4c4af4d"
       define_method(:install) do
         bin.install "mediacreator"
       end
