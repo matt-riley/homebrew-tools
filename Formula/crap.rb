@@ -3,26 +3,26 @@
 class Crap < Formula
   desc 'Change Risk Anti-Patterns (CRAP) scoring for TypeScript, Rust, Go and Lua'
   homepage 'https://github.com/matt-riley/crap'
-  version '0.1.3'
+  version '0.1.4'
   license 'MIT'
   on_macos do
     on_intel do
-      url 'https://github.com/matt-riley/crap/releases/download/v0.1.3/crap_darwin_amd64.tar.gz'
-      sha256 '867bff8905cba92220cef061004f06e211f1ddd3a7168e11d7b06cbe08f3b707'
+      url 'https://github.com/matt-riley/crap/releases/download/v0.1.4/crap_darwin_amd64.tar.gz'
+      sha256 'b3492e75d29343ed4b51ce9f6381765b3d6efe5b7d51e47defd5179e7ace524d'
     end
     on_arm do
-      url 'https://github.com/matt-riley/crap/releases/download/v0.1.3/crap_darwin_arm64.tar.gz'
-      sha256 'd86ca6c195ba1033cefdd34403d25d7e7845263f960941efe1fedd6446ffecea'
+      url 'https://github.com/matt-riley/crap/releases/download/v0.1.4/crap_darwin_arm64.tar.gz'
+      sha256 '618c622486e6425af458940761cd56275136711ff37126bc6af53c571c7d9c5c'
     end
   end
   on_linux do
     on_intel do
-      url 'https://github.com/matt-riley/crap/releases/download/v0.1.3/crap_linux_amd64.tar.gz'
-      sha256 '91263ec4ebb3bf4ae43292994f3fcbba7d62cb256c6e59ee4f1e2e4ac76b372b'
+      url 'https://github.com/matt-riley/crap/releases/download/v0.1.4/crap_linux_amd64.tar.gz'
+      sha256 '3a6eb89b38306279c2b4cfe1aae189f3c5d63cacd407c11c25741f2f60018f11'
     end
     on_arm do
-      url 'https://github.com/matt-riley/crap/releases/download/v0.1.3/crap_linux_arm64.tar.gz'
-      sha256 'f4fa2fb952c23cb1b36b7e3659e53f58640564a55e46c02273c8a90896687a75'
+      url 'https://github.com/matt-riley/crap/releases/download/v0.1.4/crap_linux_arm64.tar.gz'
+      sha256 'e7439b5067c75560db515e762ed9a73798cce2f79bd21e9b9550d8703f6bbbfe'
     end
   end
   def install
