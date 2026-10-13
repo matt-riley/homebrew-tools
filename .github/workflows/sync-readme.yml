@@ -1,0 +1,97 @@
+name: Sync README and site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - Formula/**
+      - script/generate-readme.rb
+      - test/**
+      - .github/workflows/sync-readme.yml
+  pull_request:
+    paths:
+      - Formula/**
+      - script/generate-readme.rb
+      - test/**
+      - .github/workflows/sync-readme.yml
+
+permissions:
+  contents: read
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: sync-readme-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Test README generator
+        run: ruby test/generate_readme_test.rb
+
+      - name: Check README is current
+        if: github.event_name == 'pull_request'
+        run: ruby script/generate-readme.rb --check
+
+      # Publishers push formula updates straight to main, so regenerate on the
+      # latest main and retry if another formula lands mid-run. Pushes made
+      # with GITHUB_TOKEN do not retrigger this workflow.
+      - name: Commit regenerated README
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            ruby script/generate-readme.rb
+
+            if git diff --quiet -- README.md; then
+              exit 0
+            fi
+
+            git add README.md
+            git commit -m "docs: regenerate README from formulas"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push attempt $attempt was rejected; retrying on the latest main."
+          done
+
+          exit 1
+
+  site:
+    needs: readme
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Validate GitHub App configuration
+        env:
+          APP_ID: ${{ vars.SITE_DISPATCH_APP_ID }}
+        run: |
+          if [ -z "$APP_ID" ]; then
+            echo "Repository variable SITE_DISPATCH_APP_ID is required." >&2
+            exit 1
+          fi
+
+      - name: Mint site dispatch token
+        id: token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        with:
+          app-id: ${{ vars.SITE_DISPATCH_APP_ID }}
+          private-key: ${{ secrets.SITE_DISPATCH_PRIVATE_KEY }}
+          owner: matt-riley
+          repositories: mattriley.tools
+          permission-actions: write
+
+      - name: Sync mattriley.tools
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: gh workflow run sync-tools-data.yml --repo matt-riley/mattriley.tools --ref main
