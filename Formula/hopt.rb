@@ -5,20 +5,20 @@
 class Hopt < Formula
   desc "A TUI to interact with The Hoptimist store"
   homepage "https://github.com/matt-riley/hopcli"
-  version "0.2.2"
+  version "0.2.13"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Darwin_x86_64.tar.gz"
-      sha256 "8eb88f86b77ca320faab237d0efc59bb49f9988c629dadbf6c4326def5400c65"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.13/hopt_Darwin_x86_64.tar.gz"
+      sha256 "a3e744ee7d02ec8feb1708266ad03f64f82ed9cb0096b6e2c94dbb4afb05cce5"
 
       define_method(:install) do
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Darwin_arm64.tar.gz"
-      sha256 "7426143f523bbde07d3e354594c187203b765087aa6ea0c69af5eb626443c2f8"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.13/hopt_Darwin_arm64.tar.gz"
+      sha256 "68c02012b77cdef90d0942c5311762b5eac445e9bf15a8b5034d6d9d33ee4dfc"
 
       define_method(:install) do
         bin.install "hopt"
@@ -28,15 +28,15 @@ class Hopt < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Linux_x86_64.tar.gz"
-      sha256 "0569317325af1ed4b6393a8c554fb2d4cec3286e6f8fa6e91df15fed22fac0d0"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.13/hopt_Linux_x86_64.tar.gz"
+      sha256 "d4274cc6db5c14df8f4e8f61d4abe024538ee7fd963a122c6419a6c452646f2c"
       define_method(:install) do
         bin.install "hopt"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.2/hopt_Linux_arm64.tar.gz"
-      sha256 "797d29a93556b6edccafbdcea97872a7a291c7e2a1f51264e99124f7c8eea3c7"
+      url "https://github.com/matt-riley/hopcli/releases/download/v0.2.13/hopt_Linux_arm64.tar.gz"
+      sha256 "09d820771b12905ea03834a086fc51c9f521ecdfdf57d84c5afdd7bc43452e16"
       define_method(:install) do
         bin.install "hopt"
       end
