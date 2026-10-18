@@ -44,7 +44,7 @@ brew install matt-riley/tools/hopt
 |------|-------------|-------------|----------|---------|-----------------|
 | **agit** | 1.26.2 | AI-agent version control | [matt-riley/agengit](https://github.com/matt-riley/agengit) | GPL-3.0-only | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **crap** | 0.1.5 | Change Risk Anti-Patterns (CRAP) scoring for TypeScript, Rust, Go and Lua | [matt-riley/crap](https://github.com/matt-riley/crap) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
-| **deadwood** | 0.1.1 | Unused file and dependency analysis for TypeScript, Rust, Go and Lua | [matt-riley/deadwood](https://github.com/matt-riley/deadwood) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
+| **deadwood** | 0.1.2 | Unused file and dependency analysis for TypeScript, Rust, Go and Lua | [matt-riley/deadwood](https://github.com/matt-riley/deadwood) | MIT | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **hopt** | 0.2.13 | A TUI to interact with The Hoptimist store | [matt-riley/hopcli](https://github.com/matt-riley/hopcli) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **liner** | 1.0.0 | Publish Markdown blog posts to mattriley.work via lexi's write API | [matt-riley/liner](https://github.com/matt-riley/liner) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **mediacreator** | 0.3.1 | Generate media via fal.ai and kie.ai from the CLI and save it to disk | [matt-riley/mediacreator](https://github.com/matt-riley/mediacreator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
@@ -75,7 +75,7 @@ Source: [matt-riley/crap](https://github.com/matt-riley/crap). Full README: [mat
 brew install matt-riley/tools/crap
 ```
 
-### deadwood `v0.1.1`
+### deadwood `v0.1.2`
 
 > Unused file and dependency analysis for TypeScript, Rust, Go and Lua
 
