@@ -34,7 +34,8 @@ jobs:
       group: formula-merge
       cancel-in-progress: false
     env:
-      FORMULA_RELEASE_PR_AUTHORS: matt-riley,github-actions[bot]
+      # Add crap's tap App login (app/<slug>) when crap moves to PR mode.
+      FORMULA_RELEASE_PR_AUTHORS: matt-riley
     steps:
       - name: Check out main
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -48,5 +49,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          gh auth setup-git
           script/merge-formula-release-prs.sh

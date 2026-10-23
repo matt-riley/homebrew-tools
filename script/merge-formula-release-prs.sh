@@ -14,6 +14,16 @@ cd "$repo_root"
 
 IFS=',' read -r -a author_allowlist <<<"$FORMULA_RELEASE_PR_AUTHORS"
 
+skip=()
+
+skip_contains() {
+  local target="$1" entry
+  for entry in "${skip[@]}"; do
+    [[ "$entry" == "$target" ]] && return 0
+  done
+  return 1
+}
+
 author_allowed() {
   local login="$1"
   local author
@@ -36,7 +46,7 @@ check_runs_pass() {
     state="$(gh api \
       -H "Accept: application/vnd.github+json" \
       "/repos/${GITHUB_REPOSITORY}/commits/${sha}/check-runs" \
-      --jq ".check_runs[] | select(.name == \"${name}\") | .conclusion" \
+      --jq ".check_runs[] | select(.name == \"${name}\" and .app.slug == \"github-actions\") | .conclusion" \
       | head -n 1)"
     if [[ "$state" != "success" ]]; then
       echo "Check run ${name} is not success on ${sha} (got: ${state:-missing})" >&2
@@ -56,7 +66,7 @@ qualify_pr() {
     script/formula-release-pr-qualify.sh \
       --event pull_request \
       --base-ref "$base_ref" \
-      --head-sha "$head_sha"
+      --head-sha "$head_sha" >&2
   grep -q '^qualified=true$' "$output_file"
 }
 
@@ -88,7 +98,7 @@ trust_pr() {
     echo "PR #${number}: author ${author_login} is not allowed" >&2
     return 1
   fi
-  git fetch --no-tags origin "$head_sha"
+  git fetch -q --no-tags origin "$head_sha"
   if ! qualify_pr "$head_ref" "$head_sha" "origin/main"; then
     echo "PR #${number}: does not qualify as a formula release pull request" >&2
     return 1
@@ -110,13 +120,20 @@ while true; do
   merged_this_round=0
   for number in "${open_prs[@]}"; do
     [[ -z "$number" ]] && continue
+    if skip_contains "$number"; then
+      continue
+    fi
     if ! line="$(trust_pr "$number")"; then
       continue
     fi
     read -r pr_number head_sha <<<"$line"
 
     echo "Merging formula release PR #${pr_number} at ${head_sha}"
-    gh pr merge "$pr_number" --rebase --match-head-commit "$head_sha" --delete-branch
+    if ! gh pr merge "$pr_number" --rebase --match-head-commit "$head_sha" --delete-branch; then
+      echo "::warning::merge of #${pr_number} failed; skipping" >&2
+      skip+=("$pr_number")
+      continue
+    fi
     merged_this_round=1
     merged_any=1
     break
@@ -125,10 +142,15 @@ while true; do
   [[ "$merged_this_round" -eq 0 ]] && break
 done
 
-if [[ "$merged_any" -eq 0 ]]; then
-  echo "No mergeable formula release pull requests."
+if [[ "$merged_any" -eq 0 ]] && ruby script/generate-readme.rb --check; then
+  echo "No mergeable formula release pull requests and README is current."
   exit 0
 fi
+
+git fetch --no-tags origin main
+git reset --hard origin/main
+
+script/check-duplicate-package-basenames.sh
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -153,5 +175,9 @@ for attempt in 1 2 3 4; do
   fi
 done
 
-script/check-duplicate-package-basenames.sh
 gh workflow run sync-readme.yml --ref main
+
+if [[ "${#skip[@]}" -gt 0 ]]; then
+  echo "One or more pull request merges failed: ${skip[*]}" >&2
+  exit 1
+fi
