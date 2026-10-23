@@ -1,4 +1,4 @@
-name: Sync README and site
+name: Sync site after tap changes
 
 on:
   workflow_dispatch:
@@ -6,69 +6,13 @@ on:
     branches: [main]
     paths:
       - Formula/**
-      - script/generate-readme.rb
-      - test/**
-      - .github/workflows/sync-readme.yml
-  pull_request:
-    paths:
-      - Formula/**
-      - script/generate-readme.rb
-      - test/**
-      - .github/workflows/sync-readme.yml
+      - README.md
 
 permissions:
   contents: read
 
 jobs:
-  readme:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: sync-readme-${{ github.ref }}
-      cancel-in-progress: false
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
-
-      - name: Test README generator
-        run: ruby test/generate_readme_test.rb
-
-      - name: Check README is current
-        if: github.event_name == 'pull_request'
-        run: ruby script/generate-readme.rb --check
-
-      # Publishers push formula updates straight to main, so regenerate on the
-      # latest main and retry if another formula lands mid-run. Pushes made
-      # with GITHUB_TOKEN do not retrigger this workflow.
-      - name: Commit regenerated README
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git reset --hard origin/main
-            ruby script/generate-readme.rb
-
-            if git diff --quiet -- README.md; then
-              exit 0
-            fi
-
-            git add README.md
-            git commit -m "docs: regenerate README from formulas"
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            echo "Push attempt $attempt was rejected; retrying on the latest main."
-          done
-
-          exit 1
-
   site:
-    needs: readme
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions: {}
     steps:

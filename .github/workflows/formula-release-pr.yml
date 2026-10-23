@@ -1,0 +1,95 @@
+name: Formula release PR
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - Formula/**
+      - README.md
+      - script/generate-readme.rb
+      - script/formula-release-pr-qualify.sh
+      - test/**
+      - .github/workflows/formula-release-pr.yml
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    outputs:
+      qualified: ${{ steps.qualify.outputs.qualified }}
+      reason: ${{ steps.qualify.outputs.reason }}
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin "${{ github.event.pull_request.base.ref }}"
+
+      - name: Qualify formula release pull request
+        id: qualify
+        env:
+          GITHUB_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          script/formula-release-pr-qualify.sh \
+            --event pull_request \
+            --base-ref "origin/${{ github.event.pull_request.base.ref }}"
+
+  validate:
+    needs: qualify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Test README generator
+        run: ruby test/generate_readme_test.rb
+
+      - name: Check duplicate package basenames
+        run: script/check-duplicate-package-basenames.sh
+
+      - name: Check README is current (manual formula pull requests)
+        if: needs.qualify.outputs.qualified != 'true'
+        run: ruby script/generate-readme.rb --check
+
+  sync-readme:
+    needs: [qualify, validate]
+    if: needs.qualify.outputs.qualified == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    outputs:
+      readme_pushed: ${{ steps.commit.outputs.readme_pushed }}
+    steps:
+      - name: Check out pull request branch
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Regenerate README on the pull request branch
+        run: ruby script/generate-readme.rb
+
+      - name: Commit README when it changed
+        id: commit
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "readme_pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: regenerate README from formulas"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          echo "readme_pushed=true" >> "$GITHUB_OUTPUT"
