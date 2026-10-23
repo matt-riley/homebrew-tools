@@ -83,9 +83,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ steps.pr.outputs.number }}
-        run: |
-          set -euo pipefail
-          gh pr checks "$PR" --watch --fail-fast --interval 15
+        run: script/wait-formula-pr-checks.sh "$PR"
 
       - name: Merge with rebase
         if: steps.qualify.outputs.qualified == 'true'
