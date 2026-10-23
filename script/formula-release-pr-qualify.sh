@@ -2,10 +2,13 @@
 # Decides whether a pull request is an automated GoReleaser (or equivalent)
 # formula release that may be validated and merged without human review.
 #
-# Usage (GitHub Actions):
-#   formula-release-pr-qualify.sh --event pull_request --base-ref origin/main
+# Usage:
+#   formula-release-pr-qualify.sh --event pull_request --base-ref origin/main --head-sha <sha>
 #
-# Writes github actions outputs when GITHUB_OUTPUT is set:
+# Environment:
+#   GITHUB_HEAD_REF  release branch name (e.g. hopt-0.2.14)
+#
+# Writes GitHub Actions outputs when GITHUB_OUTPUT is set:
 #   qualified=true|false
 #   reason=<short explanation>
 
@@ -25,6 +28,7 @@ write_output() {
 
 event=""
 base_ref="origin/main"
+head_sha=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -34,6 +38,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --base-ref)
       base_ref="$2"
+      shift 2
+      ;;
+    --head-sha)
+      head_sha="$2"
       shift 2
       ;;
     *)
@@ -54,34 +62,61 @@ if [[ -z "$head_ref" ]]; then
   exit 0
 fi
 
+if [[ -z "$head_sha" ]]; then
+  head_sha="HEAD"
+fi
+
 if [[ ! "$head_ref" =~ ^[a-z0-9]+([._-][a-z0-9]+)*-[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
   write_output false "head branch does not match release-branch pattern"
   exit 0
 fi
 
-mapfile -t changed < <(git diff --name-only "${base_ref}...HEAD" | sort -u)
-if [[ "${#changed[@]}" -eq 0 ]]; then
+if [[ "$head_ref" =~ ^(.+)-[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+  prefix="${BASH_REMATCH[1]}"
+else
+  write_output false "could not derive formula prefix from branch name"
+  exit 0
+fi
+
+expected_path="Formula/${prefix}.rb"
+
+statuses=()
+paths=()
+while IFS= read -r -d '' status; do
+  IFS= read -r -d '' path || true
+  [[ -z "$status" || -z "$path" ]] && continue
+  statuses+=("$status")
+  paths+=("$path")
+done < <(git diff --name-status --no-renames -z "${base_ref}...${head_sha}")
+
+if [[ "${#paths[@]}" -eq 0 ]]; then
   write_output false "no changed files"
   exit 0
 fi
 
-formula_changes=0
-for path in "${changed[@]}"; do
-  case "$path" in
-    Formula/*.rb)
-      formula_changes=$((formula_changes + 1))
-      ;;
-    README.md)
-      ;;
-    *)
-      write_output false "disallowed path in pull request: $path"
-      exit 0
-      ;;
-  esac
-done
+if [[ "${#paths[@]}" -ne 1 ]]; then
+  write_output false "pull request must change exactly one formula file"
+  exit 0
+fi
 
-if [[ "$formula_changes" -lt 1 ]]; then
-  write_output false "pull request must change at least one Formula/*.rb file"
+path="${paths[0]}"
+status="${statuses[0]}"
+
+case "$status" in
+  M|A) ;;
+  *)
+    write_output false "disallowed change type ${status} for ${path}"
+    exit 0
+    ;;
+esac
+
+if [[ "$path" != "$expected_path" ]]; then
+  write_output false "expected only ${expected_path}, got ${path}"
+  exit 0
+fi
+
+if [[ ! "$path" =~ ^Formula/[^/]+\.rb$ ]]; then
+  write_output false "disallowed path in pull request: ${path}"
   exit 0
 fi
 
