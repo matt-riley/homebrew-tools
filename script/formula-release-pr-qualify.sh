@@ -23,7 +23,7 @@ write_output() {
       echo "reason=$reason"
     } >>"$GITHUB_OUTPUT"
   fi
-  echo "formula-release-pr: $reason (qualified=$qualified)"
+  echo "formula-release-pr: $reason (qualified=$qualified)" >&2
 }
 
 event=""
@@ -119,5 +119,26 @@ if [[ ! "$path" =~ ^Formula/[^/]+\.rb$ ]]; then
   write_output false "disallowed path in pull request: ${path}"
   exit 0
 fi
+
+commit_count="$(git rev-list --count "${base_ref}..${head_sha}")"
+if [[ "$commit_count" != "1" ]]; then
+  write_output false "pull request must contain exactly one commit since the merge base"
+  exit 0
+fi
+
+raw_line="$(git diff --raw --no-renames "${base_ref}...${head_sha}" -- "$path" || true)"
+if [[ -z "$raw_line" ]]; then
+  write_output false "could not determine file mode for ${path}"
+  exit 0
+fi
+
+new_mode="$(awk '{print $2}' <<<"$raw_line")"
+case "$new_mode" in
+  100644|100755) ;;
+  *)
+    write_output false "disallowed file mode ${new_mode} for ${path}"
+    exit 0
+    ;;
+esac
 
 write_output true "qualified formula release pull request"
