@@ -143,6 +143,10 @@ while true; do
 done
 
 if [[ "$merged_any" -eq 0 ]] && ruby script/generate-readme.rb --check; then
+  if [[ "${#skip[@]}" -gt 0 ]]; then
+    echo "One or more pull request merges failed: ${skip[*]}" >&2
+    exit 1
+  fi
   echo "No mergeable formula release pull requests and README is current."
   exit 0
 fi
@@ -150,7 +154,11 @@ fi
 git fetch --no-tags origin main
 git reset --hard origin/main
 
-script/check-duplicate-package-basenames.sh
+post_merge_failed=0
+if ! script/check-duplicate-package-basenames.sh; then
+  echo "Duplicate package guard failed on main after merge." >&2
+  post_merge_failed=1
+fi
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -179,5 +187,9 @@ gh workflow run sync-readme.yml --ref main
 
 if [[ "${#skip[@]}" -gt 0 ]]; then
   echo "One or more pull request merges failed: ${skip[*]}" >&2
+  post_merge_failed=1
+fi
+
+if [[ "$post_merge_failed" -ne 0 ]]; then
   exit 1
 fi
