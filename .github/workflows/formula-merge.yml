@@ -1,12 +1,14 @@
 name: Formula merge
 
-# Merges qualified formula release pull requests serially after validation
-# workflows finish. Kept separate from formula-release-pr.yml so the merge job
-# is not counted among the pull request checks it waits on.
+# Drains all mergeable formula release pull requests serially (one workflow
+# run at a time), refreshes README on main, and dispatches site sync.
 on:
   workflow_run:
     workflows: [Formula release PR]
     types: [completed]
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,82 +16,37 @@ permissions:
 
 jobs:
   merge:
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    if: |
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'pull_request' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      )
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+      actions: write
     concurrency:
       group: formula-merge
       cancel-in-progress: false
+    env:
+      FORMULA_RELEASE_PR_AUTHORS: matt-riley,github-actions[bot]
     steps:
-      - name: Resolve pull request
-        id: pr
-        uses: actions/github-script@ed597411d8f324a9a049f2e1b0bd62e3e7c5688f # v8
-        with:
-          script: |
-            const run = context.payload.workflow_run;
-            const listed = run.pull_requests;
-            let pr = listed?.[0];
-            if (!pr) {
-              const matches = await github.paginate(
-                github.rest.pulls.list,
-                {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  state: 'open',
-                  head: `${context.repo.owner}:${run.head_branch}`,
-                }
-              );
-              pr = matches[0];
-            }
-            if (!pr) {
-              core.setFailed('No open pull request found for this workflow run');
-              return;
-            }
-            core.setOutput('number', String(pr.number));
-            core.setOutput('head_ref', pr.head.ref);
-            core.setOutput('head_sha', pr.head.sha);
-            core.setOutput('base_ref', pr.base.ref);
-
-      - name: Check out pull request head
+      - name: Check out main
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          ref: ${{ steps.pr.outputs.head_sha }}
+          ref: main
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Fetch base branch
-        run: git fetch --no-tags origin "${{ steps.pr.outputs.base_ref }}"
-
-      - name: Re-check qualification on latest merge ref
-        id: qualify
-        env:
-          GITHUB_HEAD_REF: ${{ steps.pr.outputs.head_ref }}
-        run: |
-          script/formula-release-pr-qualify.sh \
-            --event pull_request \
-            --base-ref "origin/${{ steps.pr.outputs.base_ref }}"
-
-      - name: Skip when not a formula release pull request
-        if: steps.qualify.outputs.qualified != 'true'
-        run: echo "Not a qualified formula release pull request; skipping merge."
-
-      - name: Ensure README is current before merge
-        if: steps.qualify.outputs.qualified == 'true'
-        run: ruby script/generate-readme.rb --check
-
-      - name: Wait for required pull request checks
-        if: steps.qualify.outputs.qualified == 'true'
+      - name: Merge qualified pull requests and refresh main
         env:
           GH_TOKEN: ${{ github.token }}
-          PR: ${{ steps.pr.outputs.number }}
-        run: script/wait-formula-pr-checks.sh "$PR"
-
-      - name: Merge with rebase
-        if: steps.qualify.outputs.qualified == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR: ${{ steps.pr.outputs.number }}
         run: |
           set -euo pipefail
-          gh pr merge "$PR" --rebase --delete-branch
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          script/merge-formula-release-prs.sh
