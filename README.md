@@ -49,7 +49,7 @@ brew install matt-riley/tools/hopt
 | **liner** | 1.0.0 | Publish Markdown blog posts to mattriley.work via lexi's write API | [matt-riley/liner](https://github.com/matt-riley/liner) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **mediacreator** | 0.3.1 | Generate media via fal.ai and kie.ai from the CLI and save it to disk | [matt-riley/mediacreator](https://github.com/matt-riley/mediacreator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **newbrew** | 0.4.2 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
-| **skill-eval** | 1.6.0 | Automated CLI for evaluating AI agent skills | [matt-riley/skill-evaluator](https://github.com/matt-riley/skill-evaluator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
+| **skill-eval** | 1.6.1 | Automated CLI for evaluating AI agent skills | [matt-riley/skill-evaluator](https://github.com/matt-riley/skill-evaluator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 
 ---
 
@@ -125,7 +125,7 @@ Source: [matt-riley/newbrew](https://github.com/matt-riley/newbrew). Full README
 brew install matt-riley/tools/newbrew
 ```
 
-### skill-eval `v1.6.0`
+### skill-eval `v1.6.1`
 
 > Automated CLI for evaluating AI agent skills
 
