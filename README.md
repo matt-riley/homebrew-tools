@@ -50,7 +50,7 @@ brew install matt-riley/tools/hopt
 | **liner** | 1.0.1 | Publish Markdown blog posts via lexi's write API | [matt-riley/liner](https://github.com/matt-riley/liner) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **mediacreator** | 0.3.2 | Generate media via fal.ai and kie.ai from the CLI and save it to disk | [matt-riley/mediacreator](https://github.com/matt-riley/mediacreator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 | **newbrew** | 0.4.2 | Browse and inspect new Homebrew formulae from your terminal | [matt-riley/newbrew](https://github.com/matt-riley/newbrew) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
-| **panda** | 0.1.12 | Modular Rust coding harness with a native macOS sandbox | [matt-riley/panda](https://github.com/matt-riley/panda) | — | macOS (Intel, Apple Silicon) |
+| **panda** | 0.1.13 | Modular Rust coding harness with a native macOS sandbox | [matt-riley/panda](https://github.com/matt-riley/panda) | — | macOS (Intel, Apple Silicon) |
 | **skill-eval** | 1.6.2 | Automated CLI for evaluating AI agent skills | [matt-riley/skill-evaluator](https://github.com/matt-riley/skill-evaluator) | — | macOS (Intel, Apple Silicon), Linux (x86_64, arm64) |
 
 ---
@@ -127,7 +127,7 @@ Source: [matt-riley/newbrew](https://github.com/matt-riley/newbrew). Full README
 brew install matt-riley/tools/newbrew
 ```
 
-### panda `v0.1.12`
+### panda `v0.1.13`
 
 > Modular Rust coding harness with a native macOS sandbox
 
