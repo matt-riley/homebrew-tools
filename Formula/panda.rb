@@ -3,15 +3,15 @@
 class Panda < Formula
   desc 'Modular Rust coding harness with a native macOS sandbox'
   homepage 'https://github.com/matt-riley/panda'
-  version '0.1.23'
+  version '0.1.24'
   on_macos do
     on_intel do
-      url 'https://github.com/matt-riley/panda/releases/download/v0.1.23/panda_darwin_amd64.tar.gz'
-      sha256 '38e63df2079c17845cce8d4771ff4b8c2c1b0b3e7929a32eb19bf07cdab083fd'
+      url 'https://github.com/matt-riley/panda/releases/download/v0.1.24/panda_darwin_amd64.tar.gz'
+      sha256 'd435b88e3a95052eb5e1562de8e6e25de8f27a8787f8450937102079717e5b23'
     end
     on_arm do
-      url 'https://github.com/matt-riley/panda/releases/download/v0.1.23/panda_darwin_arm64.tar.gz'
-      sha256 '89f6381b23911148e2c05d0cd74a5865ea10b8349a9c5e1c6f6ff0ce5b153c93'
+      url 'https://github.com/matt-riley/panda/releases/download/v0.1.24/panda_darwin_arm64.tar.gz'
+      sha256 '3b22ebf5a0e20b741ee20a8c36ecf66dcbc4e0a955ea1b96fe9e66f6677cd8a0'
     end
   end
   def install
